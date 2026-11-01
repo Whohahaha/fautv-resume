@@ -3,7 +3,7 @@
 // @name:de      FAU.tv Weiterschauen
 // @name:zh-CN   FAU.tv 继续观看
 // @namespace    https://github.com/Whohahaha/fautv-resume
-// @version      1.0.1
+// @version      1.0.2
 // @description  Pick up where you left off on FAU.tv: remembers playback position, marks watched episodes, adds a Continue button to series pages and keeps your last-used language.
 // @description:de  Auf FAU.tv genau dort weitermachen, wo du aufgehört hast: merkt sich die Wiedergabeposition, markiert gesehene Folgen, ergänzt einen „Fortsetzen“-Button und behält deine zuletzt gewählte Sprache.
 // @description:zh-CN  在 FAU.tv 上接着上次的进度继续看：记住播放位置、标记已看的集数、在系列页加“继续观看”按钮，并记住你上次使用的语言。
@@ -24,7 +24,9 @@
   // ------------------------------------------------------------------
   // Settings
   // UI_LANG: language of the labels this script adds ("auto" | "en" | "de" | "zh").
-  // "auto" follows the browser language. This does NOT change the FAU.tv site language.
+  // "auto" follows the language of the FAU.tv page (English page -> English, German page -> German);
+  // if that cannot be detected it falls back to the browser language.
+  // This does NOT change the FAU.tv site language.
   // ------------------------------------------------------------------
   const UI_LANG = 'auto';
 
@@ -33,9 +35,16 @@
     de: { done: '✓ Gesehen',  here: '← Hier zuletzt',  cont: 'Fortsetzen', next: 'Nächste Folge', replay: 'Erneut ansehen' },
     zh: { done: '✓ 已看完',   here: '← 上次看到这里',   cont: '继续观看',  next: '下一集',        replay: '重新观看' }
   };
-  const nav = (navigator.language || 'en').toLowerCase();
-  const uiLang = UI_LANG !== 'auto' ? UI_LANG : nav.startsWith('zh') ? 'zh' : nav.startsWith('de') ? 'de' : 'en';
-  const T = STRINGS[uiLang] || STRINGS.en;
+  let T = STRINGS.en;
+  const refreshLabels = () => {
+    let lang = UI_LANG;
+    if (lang === 'auto') {
+      const site = siteLang();                       // 'en' | 'de' (from the page itself)
+      const nav = (navigator.language || 'en').toLowerCase();
+      lang = site === 'en' || site === 'de' ? site : nav.startsWith('de') ? 'de' : nav.startsWith('zh') ? 'zh' : 'en';
+    }
+    T = STRINGS[lang] || STRINGS.en;
+  };
 
   const P = 'faututv2:';
   const LANG_KEY = 'faututv-lang';
@@ -118,6 +127,7 @@
 
   // ---------- 2) Series page: progress badge on every episode ----------
   function mark() {
+    refreshLabels();
     document.querySelectorAll('.rs-badge').forEach(b => b.remove());
     document.querySelectorAll('li[data-rs-last]').forEach(li => { li.style.outline = ''; delete li.dataset.rsLast; });
 
@@ -149,6 +159,7 @@
 
   // ---------- 3) Series page: "Continue" button before "Share this series" ----------
   function addContinue() {
+    refreshLabels();
     document.getElementById('rs-continue')?.remove();
     const m = location.pathname.match(SERIES_RE);
     if (!m) return;

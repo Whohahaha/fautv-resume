@@ -18,7 +18,7 @@ Ein kleines Userscript: Es merkt sich den Fortschritt in Vorlesungsaufzeichnunge
   - letzte Folge fertig → `ERNEUT ANSEHEN · #12`
 - **Fortschrittsmarken** – jede Folge in der Liste zeigt `▶ 25%` oder `✓ Gesehen`; die zuletzt gesehene ist hervorgehoben.
 - **Merkt sich die Sprache** – FAU.tv startet jedes Mal auf Deutsch. Das Skript stellt die zuletzt gewählte Sprache (Englisch oder Deutsch) wieder ein.
-- **Spricht deine Sprache** – die ergänzten Beschriftungen folgen der Browsersprache: English, Deutsch oder 简体中文.
+- **Folgt der Seitensprache** – die ergänzten Beschriftungen folgen der Sprache von FAU.tv: englische Seite → English, deutsche Seite → Deutsch. 简体中文 ist über `UI_LANG` wählbar.
 - **Privat** – alles bleibt im Browser (`localStorage`). Es wird nichts versendet.
 
 ## Installation
@@ -45,7 +45,7 @@ Die Rohdatei [`fautv-resume.user.js`](fautv-resume.user.js) öffnen und auf *Ins
 
 Einfach schauen: Folge öffnen, ein Stück ansehen, schließen. Beim nächsten Mal geht es automatisch weiter, und die Serienseite zeigt, wo du stehst.
 
-Um die Sprache der vom Skript ergänzten Beschriftungen festzulegen, ändere diese Zeile am Dateianfang:
+Standardmäßig folgen die Beschriftungen der Sprache der FAU.tv-Seite (Englisch oder Deutsch). Um eine Sprache festzulegen (auch 简体中文), ändere diese Zeile am Dateianfang:
 
 ```js
 const UI_LANG = 'auto';   // 'auto' | 'en' | 'de' | 'zh'

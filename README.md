@@ -18,7 +18,7 @@ A small userscript that remembers your progress in lecture recordings, shows whi
   - last episode finished → `REPLAY · #12`
 - **Progress badges** – every episode in the list shows `▶ 25%` or `✓ Watched`; the most recent one is highlighted.
 - **Remembers your language** – FAU.tv opens in German every time. This script switches back to the language you chose last (English or German).
-- **Speaks your language** – the labels it adds follow your browser language: English, Deutsch or 简体中文.
+- **Speaks the site's language** – the labels it adds follow the FAU.tv language: English page → English, German page → Deutsch. 简体中文 is available through `UI_LANG`.
 - **Private** – everything stays in your browser (`localStorage`). Nothing is sent anywhere.
 
 ## Install
@@ -45,7 +45,7 @@ Open the raw [`fautv-resume.user.js`](fautv-resume.user.js) file and click *Inst
 
 Just watch. Open an episode, watch a bit, close it. Next time it continues automatically, and the series page shows where you are.
 
-To change the language of the labels added by the script, edit this line at the top of the file:
+By default the labels follow the language of the FAU.tv page (English or German). To force a language (including 简体中文), edit this line at the top of the file:
 
 ```js
 const UI_LANG = 'auto';   // 'auto' | 'en' | 'de' | 'zh'

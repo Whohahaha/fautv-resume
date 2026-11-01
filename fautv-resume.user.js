@@ -2,12 +2,16 @@
 // @name         FAU.tv Resume
 // @name:de      FAU.tv Weiterschauen
 // @name:zh-CN   FAU.tv 继续观看
-// @namespace    https://github.com/fautv-resume
-// @version      1.0.0
+// @namespace    https://github.com/Whohahaha/fautv-resume
+// @version      1.0.1
 // @description  Pick up where you left off on FAU.tv: remembers playback position, marks watched episodes, adds a Continue button to series pages and keeps your last-used language.
 // @description:de  Auf FAU.tv genau dort weitermachen, wo du aufgehört hast: merkt sich die Wiedergabeposition, markiert gesehene Folgen, ergänzt einen „Fortsetzen“-Button und behält deine zuletzt gewählte Sprache.
 // @description:zh-CN  在 FAU.tv 上接着上次的进度继续看：记住播放位置、标记已看的集数、在系列页加“继续观看”按钮，并记住你上次使用的语言。
 // @license      MIT
+// @homepageURL  https://github.com/Whohahaha/fautv-resume
+// @supportURL   https://github.com/Whohahaha/fautv-resume/issues
+// @downloadURL  https://raw.githubusercontent.com/Whohahaha/fautv-resume/main/fautv-resume.user.js
+// @updateURL    https://raw.githubusercontent.com/Whohahaha/fautv-resume/main/fautv-resume.user.js
 // @match        https://www.fau.tv/*
 // @match        https://fau.tv/*
 // @run-at       document-idle

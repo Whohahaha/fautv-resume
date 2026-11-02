@@ -7,6 +7,8 @@
 Auf [FAU.tv](https://www.fau.tv), dem Videoportal der FAU Erlangen-Nürnberg, genau dort weiterschauen, wo du aufgehört hast.
 Ein kleines Userscript: Es merkt sich den Fortschritt in Vorlesungsaufzeichnungen, zeigt, welche Folgen du schon gesehen hast, und behält deine Sprache.
 
+**[→ Installieren (Tampermonkey / Violentmonkey)](https://raw.githubusercontent.com/Whohahaha/fautv-resume/main/fautv-resume.user.js)** · Safari, iPhone & iPad: siehe [Installation](#installation)
+
 > Inoffizielles Projekt. Nicht mit der FAU Erlangen-Nürnberg verbunden und nicht von ihr unterstützt.
 
 ## Funktionen

@@ -7,6 +7,8 @@
 Pick up where you left off on [FAU.tv](https://www.fau.tv), the video portal of FAU Erlangen-Nürnberg.
 A small userscript that remembers your progress in lecture recordings, shows which episodes you have watched, and keeps your language.
 
+**[→ Install (Tampermonkey / Violentmonkey)](https://raw.githubusercontent.com/Whohahaha/fautv-resume/main/fautv-resume.user.js)** · Safari, iPhone & iPad: see [Install](#install)
+
 > Unofficial project. Not affiliated with or endorsed by FAU Erlangen-Nürnberg.
 
 ## Features

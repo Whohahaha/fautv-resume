@@ -7,6 +7,8 @@
 让 [FAU.tv](https://www.fau.tv)（埃尔朗根-纽伦堡大学视频平台）接着上次的进度继续看。
 这是一个很小的用户脚本：记住讲座录像的播放进度，标出哪些集看过了，并记住你上次用的语言。
 
+**[→ 一键安装（Tampermonkey / Violentmonkey）](https://raw.githubusercontent.com/Whohahaha/fautv-resume/main/fautv-resume.user.js)** · Safari、iPhone、iPad：见[安装](#安装)
+
 > 非官方项目，与埃尔朗根-纽伦堡大学（FAU）无关，也未获其认可。
 
 ## 功能

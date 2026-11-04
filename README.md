@@ -18,10 +18,12 @@ A small userscript that remembers your progress in lecture recordings, shows whi
   - unfinished episode → `CONTINUE · #2 · 25%`
   - finished episode → `NEXT · #3`
   - last episode finished → `REPLAY · #12`
-- **Progress badges** – every episode in the list shows `▶ 25%` or `✓ Watched`; the most recent one is highlighted.
+- **Progress badges** – every episode in the list shows `▶ 25% · 45 min left` or `✓ Watched`; the most recent one is highlighted.
+- **Playback speed** – the speed you pick (1.5×, 2×, …) is kept for every recording.
 - **Remembers your language** – FAU.tv opens in German every time. This script switches back to the language you chose last (English or German).
 - **Speaks the site's language** – the labels it adds follow the FAU.tv language: English page → English, German page → Deutsch. 简体中文 is available through `UI_LANG`.
-- **Private** – everything stays in your browser (`localStorage`). Nothing is sent anywhere.
+- **Sync between devices (optional)** – keep progress in step on laptop, phone and tablet through a private GitHub Gist of your own. You can also export/import progress as a file.
+- **Private** – everything stays in your browser (`localStorage`). Nothing is sent anywhere unless you turn on sync, and then only to your own GitHub account.
 
 ## Install
 
@@ -53,6 +55,19 @@ By default the labels follow the language of the FAU.tv page (English or German)
 const UI_LANG = 'auto';   // 'auto' | 'en' | 'de' | 'zh'
 ```
 
+## Sync between devices
+
+Optional. Progress is stored in a **secret Gist in your own GitHub account**; there is no server of ours in between.
+
+1. [Create a GitHub token (classic)](https://github.com/settings/tokens/new?scopes=gist&description=FAU.tv%20Resume) with **only** the `gist` scope.
+2. On any FAU.tv series page click **☁ Sync** (next to *Share this series*; Tampermonkey/Violentmonkey also list it in their menu), paste the token and click **Connect**.
+3. Do the same on your other devices with the same token. They find the same Gist automatically.
+
+Sync runs when you open FAU.tv, when you come back to the tab, and about 20 seconds after progress changes. For each episode the newer record wins, so devices never overwrite newer progress with older one.
+The token is saved in your userscript manager's storage on that device. *Disconnect* removes it. You can revoke it on GitHub at any time.
+
+No GitHub account? Use **Export progress** / **Import progress** in the same panel to move a JSON file between devices.
+
 ## How it works
 
 | Part | Mechanism |
@@ -64,7 +79,7 @@ const UI_LANG = 'auto';   // 'auto' | 'en' | 'de' | 'zh'
 
 ## Limitations
 
-- Progress lives in one browser on one device. It is **not** synced, and `fau.tv` and `www.fau.tv` count as different sites – pick one address and stick to it.
+- Progress lives in one browser on one device. It is only synced if you turn on [sync](#sync-between-devices). `fau.tv` is redirected to `www.fau.tv` (progress saved on `fau.tv` is carried over once), so everything lives in one place.
 - Clearing website data deletes your progress.
 - On a fresh visit the page may briefly load in German before it switches to your language.
 - The script relies on the current FAU.tv page structure. If FAU redesigns the portal, something may break – please open an issue.

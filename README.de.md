@@ -18,10 +18,12 @@ Ein kleines Userscript: Es merkt sich den Fortschritt in Vorlesungsaufzeichnunge
   - Folge nicht fertig → `FORTSETZEN · #2 · 25%`
   - Folge fertig → `NÄCHSTE FOLGE · #3`
   - letzte Folge fertig → `ERNEUT ANSEHEN · #12`
-- **Fortschrittsmarken** – jede Folge in der Liste zeigt `▶ 25%` oder `✓ Gesehen`; die zuletzt gesehene ist hervorgehoben.
+- **Fortschrittsmarken** – jede Folge in der Liste zeigt `▶ 25% · noch 45 Min.` oder `✓ Gesehen`; die zuletzt gesehene ist hervorgehoben.
+- **Wiedergabegeschwindigkeit** – die gewählte Geschwindigkeit (1,5×, 2×, …) gilt für alle Aufzeichnungen.
 - **Merkt sich die Sprache** – FAU.tv startet jedes Mal auf Deutsch. Das Skript stellt die zuletzt gewählte Sprache (Englisch oder Deutsch) wieder ein.
 - **Folgt der Seitensprache** – die ergänzten Beschriftungen folgen der Sprache von FAU.tv: englische Seite → English, deutsche Seite → Deutsch. 简体中文 ist über `UI_LANG` wählbar.
-- **Privat** – alles bleibt im Browser (`localStorage`). Es wird nichts versendet.
+- **Sync zwischen Geräten (optional)** – Fortschritt auf Laptop, Handy und Tablet abgleichen, über ein privates GitHub-Gist in deinem eigenen Konto. Export/Import als Datei geht auch.
+- **Privat** – alles bleibt im Browser (`localStorage`). Es wird nichts versendet, außer du schaltest Sync ein – dann nur in dein eigenes GitHub-Konto.
 
 ## Installation
 
@@ -53,6 +55,19 @@ Standardmäßig folgen die Beschriftungen der Sprache der FAU.tv-Seite (Englisch
 const UI_LANG = 'auto';   // 'auto' | 'en' | 'de' | 'zh'
 ```
 
+## Sync zwischen Geräten
+
+Optional. Der Fortschritt liegt in einem **geheimen Gist in deinem eigenen GitHub-Konto**; kein Server von uns dazwischen.
+
+1. [GitHub-Token (classic) erstellen](https://github.com/settings/tokens/new?scopes=gist&description=FAU.tv%20Resume) – **nur** mit dem Scope `gist`.
+2. Auf einer FAU.tv-Serienseite auf **☁ Sync** klicken (neben *Serie teilen*; in Tampermonkey/Violentmonkey auch im Menü), Token einfügen, **Verbinden**.
+3. Auf den anderen Geräten dasselbe mit demselben Token. Sie finden das Gist automatisch.
+
+Synchronisiert wird beim Öffnen von FAU.tv, beim Zurückkehren zum Tab und etwa 20 Sekunden nach einer Änderung. Pro Folge gewinnt der neuere Eintrag, älterer Fortschritt überschreibt nie neueren.
+Das Token liegt im Speicher deines Userscript-Managers auf dem Gerät. *Trennen* entfernt es; auf GitHub kannst du es jederzeit widerrufen.
+
+Kein GitHub-Konto? Mit **Fortschritt exportieren** / **importieren** im selben Fenster eine JSON-Datei zwischen Geräten übertragen.
+
 ## So funktioniert es
 
 | Teil | Mechanismus |
@@ -64,7 +79,7 @@ const UI_LANG = 'auto';   // 'auto' | 'en' | 'de' | 'zh'
 
 ## Einschränkungen
 
-- Der Fortschritt liegt in einem Browser auf einem Gerät und wird **nicht** synchronisiert. `fau.tv` und `www.fau.tv` gelten als verschiedene Seiten – bleib bei einer Adresse.
+- Der Fortschritt liegt in einem Browser auf einem Gerät und wird nur synchronisiert, wenn du [Sync](#sync-zwischen-geräten) einschaltest. `fau.tv` wird auf `www.fau.tv` umgeleitet (auf `fau.tv` gespeicherter Fortschritt wird einmalig mitgenommen), damit alles an einem Ort liegt.
 - Das Löschen von Websitedaten löscht den Fortschritt.
 - Bei einem frischen Besuch kann die Seite kurz auf Deutsch erscheinen, bevor sie in deine Sprache wechselt.
 - Das Skript hängt von der aktuellen Seitenstruktur von FAU.tv ab. Bei einem Redesign kann etwas brechen – bitte ein Issue eröffnen.
